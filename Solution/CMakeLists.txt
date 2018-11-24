@@ -12,3 +12,7 @@ add_executable(GildedRose
 add_executable(GildedRoseExplore
         GildedRose.cpp
         GildedRose.h GildedRoseAppExplore.cpp)
+
+add_executable(GildedRoseTests
+        GildedRose.cpp
+        GildedRose.h ext/catch.hpp GildedRoseTests.cpp GildedRoseTestImpl.cpp)
