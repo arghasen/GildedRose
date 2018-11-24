@@ -78,3 +78,19 @@ TEST_CASE("Quality Of an Item is never more than 50"){
     REQUIRE(item.quality==50);
 
 }
+
+TEST_CASE("Sulfuras are never sold nor decrease in quality"){
+    vector<Item> items;
+    items.push_back(Item("Sulfuras, Hand of Ragnaros", 20, 50));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==20);
+    REQUIRE(item.quality==50);
+
+}
+
