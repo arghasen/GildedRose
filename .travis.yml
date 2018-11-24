@@ -1,0 +1,18 @@
+language: cpp
+dist: xenial
+branches:
+    only:
+    - master
+    
+script:
+    - mkdir -p build
+    - cd build
+    - cmake ../Solution
+    - make
+    - ./GildedRoseTests
+    
+after_success:
+    # Creating report
+  - cd build
+  # Uploading report to CodeCov
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
