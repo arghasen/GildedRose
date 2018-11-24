@@ -94,3 +94,59 @@ TEST_CASE("Sulfuras are never sold nor decrease in quality"){
 
 }
 
+TEST_CASE("Backstage Passes increase in Quality"){
+    vector<Item> items;
+    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 20, 10));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==19);
+    REQUIRE(item.quality==11);
+}
+
+TEST_CASE("Backstage Passes increase in Quality by 2 when 10 days or less"){
+    vector<Item> items;
+    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 10, 10));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==9);
+    REQUIRE(item.quality==12);
+}
+
+
+TEST_CASE("Backstage Passes increase in Quality by 3 when 5 days or less"){
+    vector<Item> items;
+    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 5, 10));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==4);
+    REQUIRE(item.quality==13);
+}
+
+TEST_CASE("Backstage Passes drop to 0 after concert"){
+    vector<Item> items;
+    items.push_back(Item("Backstage passes to a TAFKAL80ETC concert", 0, 10));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==-1);
+    REQUIRE(item.quality==0);
+}
