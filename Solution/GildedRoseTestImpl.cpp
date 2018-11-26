@@ -163,3 +163,31 @@ TEST_CASE("Backstage Passes drop to 0 after concert"){
     REQUIRE(item.sellIn==-1);
     REQUIRE(item.quality==0);
 }
+
+TEST_CASE("Conjured Items drop twice as fast in quality"){
+     vector<Item> items;
+    items.push_back(Item("Conjured Mana Cake", 20, 10));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==19);
+    REQUIRE(item.quality==8);
+}
+
+TEST_CASE("Conjured Items drop by 4 after sellby date"){
+    vector<Item> items;
+    items.push_back(Item("Conjured Mana Cake", 0, 10));
+
+    GildedRose app(items);
+
+    app.updateQuality();
+
+    const auto& item = app.items.front();
+
+    REQUIRE(item.sellIn==-1);
+    REQUIRE(item.quality==6);
+}

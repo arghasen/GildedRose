@@ -21,9 +21,18 @@ public:
     
     void updateQuality();
 
-    void decreaseSellin(Item &item) const;
+private:
+    inline void decreaseSellin(Item &item) const;
 
-    void updateConcertQuality(Item &item) const;
+    inline void updateConcertQuality(Item &item) const;
 
-    void clampMaxQuality(Item &item) const;
+    inline void clampMaxQuality(Item &item) const;
+
+    inline void updateBrieQuality(Item &item) const;
+
+    inline void updateNormalItemsQuality(Item &item) const;
+
+    inline void updateConjuredItems(Item &item) const;
+
+    inline void clampMinQuality( Item &item) const;
 };
