@@ -22,4 +22,8 @@ public:
     void updateQuality();
 
     void decreaseSellin(Item &item) const;
+
+    void updateConcertQuality(Item &item) const;
+
+    void clampMaxQuality(Item &item) const;
 };
