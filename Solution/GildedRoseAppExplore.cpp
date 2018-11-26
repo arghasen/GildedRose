@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <iostream>
+#include <chrono>
 #include "GildedRose.h"
 
 int main() {
@@ -23,13 +24,17 @@ int main() {
     for (const auto &item: app.items) {
         std::cout << item.name << " " << item.sellIn<<" " << item.quality << std::endl;
     }
+    auto start = std::chrono::high_resolution_clock::now();
 
     for (int i = 0; i < 30; ++i) {
-        std::cout<<"day "<<i+1<<std::endl;
+//        std::cout<<"day "<<i+1<<std::endl;
         app.updateQuality();
-        for (const auto &item: app.items) {
-            std::cout << item.name << " " << item.sellIn <<" " <<item.quality << std::endl;
-        }
+//        for (const auto &item: app.items) {
+//            std::cout << item.name << " " << item.sellIn <<" " <<item.quality << std::endl;
+//        }
     }
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+    cout << duration.count() << endl;
     return 0;
 }

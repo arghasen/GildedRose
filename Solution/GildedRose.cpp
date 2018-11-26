@@ -7,15 +7,14 @@ void GildedRose::updateQuality()
 {
     for (auto& item:items)
     {
+        if (item.name == "Sulfuras, Hand of Ragnaros")
+            continue;
+
+        decreaseSellin(item);
+
         if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert")
         {
-            if (item.quality > 0)
-            {
-                if (item.name != "Sulfuras, Hand of Ragnaros")
-                {
-                    item.quality = item.quality - 1;
-                }
-            }
+                    item.quality = std::max(item.quality - 1,0);
         }
         else
         {
@@ -44,10 +43,6 @@ void GildedRose::updateQuality()
             }
         }
 
-        if (item.name != "Sulfuras, Hand of Ragnaros")
-        {
-            item.sellIn = item.sellIn - 1;
-        }
 
         if (item.sellIn < 0)
         {
@@ -57,10 +52,7 @@ void GildedRose::updateQuality()
                 {
                     if (item.quality > 0)
                     {
-                        if (item.name != "Sulfuras, Hand of Ragnaros")
-                        {
                             item.quality = item.quality - 1;
-                        }
                     }
                 }
                 else
@@ -77,6 +69,10 @@ void GildedRose::updateQuality()
             }
         }
     }
+}
+
+void GildedRose::decreaseSellin(Item &item) const {
+        item.sellIn = item.sellIn - 1;
 }
 
 
